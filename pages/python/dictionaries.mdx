@@ -1,0 +1,190 @@
+---
+title: "Словари в Python"
+description: "Изучение словарей"
+date: "2025-03-03"
+---
+
+import { Callout } from "../../components/Callout";
+
+# Словари в Python
+
+Словари в Python — это неупорядоченные коллекции данных, которые хранят пары "ключ-значение". Каждый элемент в словаре имеет уникальный ключ, который используется для доступа к соответствующему значению.
+
+## Создание словаря
+
+Словарь создается с помощью фигурных скобок `{}`, где каждый элемент состоит из пары ключ-значение, разделенных двоеточием.
+
+```python
+# Создание словаря
+person = {'name': 'Alice', 'age': 25, 'city': 'New York'}
+
+# Пустой словарь
+empty_dict = {}
+```
+
+## Доступ к элементам
+
+Для доступа к элементам словаря используется ключ
+
+<Callout type="warning" title="Обратите внимание">
+  Если ключ не существует, возникнет ошибка `KeyError`
+</Callout>
+
+```python
+person = {'name': 'Alice', 'age': 25, 'city': 'New York'}
+
+# Доступ к элементу по ключу
+print(person['name'])  # Alice
+print(person['age'])   # 25
+```
+
+## Добавление и изменение элементов
+
+Чтобы добавить или изменить элемент, нужно просто указать ключ и присвоить ему новое значение
+
+```python
+person = {'name': 'Alice', 'age': 25}
+
+# Изменение значения по ключу
+person['age'] = 26
+
+# Добавление нового элемента
+person['city'] = 'New York'
+
+print(person)  # {'name': 'Alice', 'age': 26, 'city': 'New York'}
+```
+
+## Удаление элементов
+
+Для удаления элемента из словаря используется метод `del` или метод `pop()`
+
+```python
+person = {'name': 'Alice', 'age': 25, 'city': 'New York'}
+
+# Удаление элемента по ключу
+del person['age']
+
+# Удаление и возвращение элемента с помощью pop()
+city = person.pop('city')
+
+print(person)  # {'name': 'Alice'}
+print(city)    # 'New York'
+```
+
+## Методы словарей
+
+### get()
+
+Метод `get()` возвращает значение по ключу, если он существует, и `None`, если ключ отсутствует. Также можно указать значение по умолчанию
+
+```python
+person = {'name': 'Alice', 'age': 25}
+
+# Получение значения по ключу
+name = person.get('name')
+age = person.get('age')
+address = person.get('address', 'Unknown')  # Если ключ не найден, вернется 'Unknown'
+
+print(name)     # Alice
+print(address)  # Unknown
+```
+
+### keys(), values(), items()
+
+Методы `keys()`, `values()` и `items()` возвращают представление всех ключей, значений и пар ключ-значение в словаре соответственно
+
+```python
+person = {'name': 'Alice', 'age': 25}
+
+# Получение всех ключей
+keys = person.keys()
+print(keys)  # dict_keys(['name', 'age'])
+
+# Получение всех значений
+values = person.values()
+print(values)  # dict_values(['Alice', 25])
+
+# Получение всех пар ключ-значение
+items = person.items()
+print(items)  # dict_items([('name', 'Alice'), ('age', 25)])
+```
+
+### update()
+
+Метод `update()` позволяет обновить словарь, добавив новые элементы или изменив существующие
+
+```python
+person = {'name': 'Alice', 'age': 25}
+
+# Обновление словаря
+person.update({'city': 'New York', 'age': 26})
+
+print(person)  # {'name': 'Alice', 'age': 26, 'city': 'New York'}
+```
+
+## Операции над словарями
+
+### Проверка наличия ключа
+
+Для проверки наличия ключа в словаре используется оператор `in`
+
+```python
+person = {'name': 'Alice', 'age': 25}
+
+# Проверка наличия ключа
+print('name' in person)  # True
+print('address' in person)  # False
+```
+
+### Доступ к значениям с использованием setdefault()
+
+Метод `setdefault()` возвращает значение по ключу, если он существует, и если нет — добавляет ключ с заданным значением
+
+```python
+person = {'name': 'Alice', 'age': 25}
+
+# Если ключ 'address' не существует, он будет добавлен со значением 'Unknown'
+address = person.setdefault('address', 'Unknown')
+
+print(address)  # Unknown
+print(person)   # {'name': 'Alice', 'age': 25, 'address': 'Unknown'}
+```
+
+## Вложенные словари
+
+Словари могут содержать другие словари, образуя структуры данных с несколькими уровнями вложенности
+
+```python
+person = {
+    'name': 'Alice',
+    'address': {'city': 'New York', 'zip': '10001'},
+}
+
+# Доступ к вложенному словарю
+city = person['address']['city']
+print(city)  # New York
+```
+
+## Циклы и словари
+
+Словари активно используются в циклах, чтобы пройтись по ключам, значениям или парам "ключ-значение"
+
+```python
+person = {'name': 'Alice', 'age': 25, 'city': 'New York'}
+
+# Перебор ключей
+for key in person:
+    print(key)
+
+# Перебор значений
+for value in person.values():
+    print(value)
+
+# Перебор пар ключ-значение
+for key, value in person.items():
+    print(key, value)
+```
+
+# Заключение
+
+Словари — это важный тип данных в Python, который позволяет эффективно работать с коллекциями данных, где элементы ассоциируются с уникальными ключами. С помощью методов и операций над словарями можно гибко манипулировать данными, добавлять, изменять и удалять элементы, а также удобно итерировать по данным

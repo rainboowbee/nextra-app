@@ -3,14 +3,14 @@
   "EGE": "ЕГЭ",
   "OGE": "ОГЭ",
   "python": "Python",
-  "about": {
-    "title": "О проекте",
-    "type": "page"
-  },
   "contact": {
     "title": "Контакты ↗",
     "type": "page",
     "href": "https://t.me/rainboowbee",
     "newWindow": true
+  },
+  "about": {
+    "title": "О проекте",
+    "type": "page"
   }
 }

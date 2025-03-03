@@ -1,6 +1,8 @@
 {
   "index": "Обзор модулей",
-  "os": "Модуль os",
-  "sys": "Модуль sys",
-  "datetime": "Модуль datetime"
+  "itertools": "Модуль os",
+  "functools": "Модуль sys",
+  "numbersystem": "Модуль datetime",
+  "turtle": "Модуль datetime",
+  "ipaddress": "Модуль datetime"
 }

@@ -1,0 +1,187 @@
+---
+title: "Строки в Python: полное руководство"
+description: "Изучение строк, индексации, срезов и методов работы со строками в Python"
+date: "2025-03-03"
+---
+
+import { Callout } from "../../components/Callout";
+import { Steps } from "../../components/Steps";
+
+# Строки в Python: полное руководство
+
+Строки являются одним из базовых типов данных в Python. Это последовательности символов, которые можно использовать для хранения текстовой информации. В этом руководстве мы рассмотрим основные аспекты работы со строками, включая индексацию, срезы и методы строк.
+
+<Callout type="info" title="Важно знать">
+  В Python строки неизменяемы (immutable) — после создания строки вы не можете
+  изменить её содержимое. Любые операции, которые "изменяют" строку, на самом
+  деле создают новую строку.
+</Callout>
+
+## Создание строк
+
+В Python строки можно создавать, используя одинарные, двойные или тройные кавычки:
+
+```python
+# Все эти переменные содержат строки
+single_quotes = 'Привет, мир!'
+double_quotes = "Привет, мир!"
+triple_quotes = '''Привет,
+мир!'''
+triple_double = """Документационная
+строка"""
+```
+
+<Callout type="success" title="Совет">
+  Тройные кавычки удобны для создания многострочных строк.
+</Callout>
+
+## Индексация строк
+
+Каждый символ в строке имеет свой индекс, начиная с 0 для первого символа. Отрицательные индексы используются для доступа к символам с конца строки, где -1 обозначает последний символ.
+
+### Положительная индексация
+
+```python
+text = "Python"
+
+print(text[0])  # 'P'
+print(text[1])  # 'y'
+print(text[5])  # 'n'
+```
+
+Индексация начинается с 0, поэтому `text[0]` — это первый символ.
+
+### Отрицательная индексация
+
+```python
+text = "Python"
+
+print(text[-1])  # 'n'
+print(text[-2])  # 'o'
+print(text[-6])  # 'P'
+```
+
+Отрицательные индексы считаются с конца строки. `text[-1]` — это последний символ.
+
+<Callout type="warning" title="Предупреждение">
+  Попытка доступа к индексу за пределами строки вызовет ошибку `IndexError`.
+  Например, `text[6]` или `text[-7]` для строки "Python" приведут к ошибке.
+</Callout>
+
+### Срезы строк
+
+Срезы позволяют извлекать подстроки, указывая диапазон индексов. Синтаксис среза: `строка[начало:конец:шаг]`.
+
+```python
+text = "Python Programming"
+
+# Срезы с положительными индексами
+print(text[0:6])      # "Python"
+print(text[7:18])     # "Programming"
+
+# Срезы с опущенными индексами
+print(text[:6])       # "Python" (с начала до 6)
+print(text[7:])       # "Programming" (от 7 до конца)
+print(text[:])        # "Python Programming" (вся строка)
+
+# Срезы с шагом
+print(text[::2])      # "Pto rgamn" (каждый второй символ)
+print(text[0:6:2])    # "Pto" (каждый второй символ от 0 до 6)
+
+# Срезы с отрицательными индексами
+print(text[-11:-1])   # "Programmin" (11 символов с конца до предпоследнего)
+print(text[:-7])      # "Python Pro" (с начала до 7 символов с конца)
+```
+
+<Callout type="info">
+  При использовании срезов индекс `начало` включается в результат, а индекс
+  `конец` не включается. Это позволяет легко выполнять операции разделения строк
+  без перекрытия.
+</Callout>
+
+### Обратный порядок строки
+
+Используя отрицательный шаг, можно получить строку в обратном порядке:
+
+```python
+text = "Python"
+reversed_text = text[::-1]  # "nohtyP"
+```
+
+## Методы строк
+
+Python предоставляет множество встроенных методов для работы со строками.
+
+### Методы изменения регистра
+
+```python
+text = "Python Programming"
+
+print(text.upper())      # "PYTHON PROGRAMMING"
+print(text.lower())      # "python programming"
+print(text.title())      # "Python Programming"
+print(text.capitalize()) # "Python programming"
+print(text.swapcase())   # "pYTHON pROGRAMMING"
+```
+
+### Методы поиска и проверки
+
+```python
+text = "Python Programming"
+
+print(text.find("Pro"))     # 7 (возвращает индекс или -1 если нет этой подстроки)
+print(text.index("Pro"))    # 7 (возвращает индекс или ошибку)
+print(text.count("P"))      # 2 (количество вхождений)
+print(text.startswith("Py")) # True если начинается с "Ру"
+print(text.endswith("ing"))  # True если заканчивается на "ing"
+print("123".isdigit())       # True
+print("abc".isalpha())       # True
+print("Python123".isalnum()) # True
+print("   ".isspace())       # True
+```
+
+### Методы обработки строк
+
+```python
+text = "  Python  "
+
+print(text.strip())         # "Python" (удаляет пробелы с обоих концов)
+print(text.lstrip())        # "Python  " (удаляет пробелы слева)
+print(text.rstrip())        # "  Python" (удаляет пробелы справа)
+
+sentence = "Python,Java,C++,JavaScript"
+print(sentence.split(","))  # ["Python", "Java", "C++", "JavaScript"]
+
+words = ["Python", "Programming", "Language"]
+print(" ".join(words))      # "Python Programming Language"
+
+bad_text = "Python\tProgramming\nLanguage"
+print(bad_text.expandtabs(4))  # Заменяет табуляции на 4 пробела
+```
+
+### Методы замены в строках
+
+```python
+text = "Python is amazing, Python is fun"
+
+print(text.replace("Python", "JavaScript"))
+# "JavaScript is amazing, JavaScript is fun"
+
+print(text.replace("Python", "JavaScript", 1))
+# "JavaScript is amazing, Python is fun"
+```
+
+<Callout type="error" title="Внимание">
+  Помните, что строки в Python неизменяемы! Все методы, которые "изменяют"
+  строку, на самом деле возвращают новую строку. Оригинальная строка остается
+  неизменной.
+</Callout>
+
+## Заключение
+
+Строки в Python — мощный и гибкий инструмент для работы с текстовыми данными. Понимание индексации, срезов и встроенных методов строк необходимо для эффективного программирования на Python.
+
+<Callout type="info" title="Дополнительные ресурсы">
+  Для углубленного изучения строк рекомендуем обратиться к официальной
+  документации Python и практиковаться в решении различных задач со строками.
+</Callout>
