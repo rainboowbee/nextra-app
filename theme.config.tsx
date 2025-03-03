@@ -4,12 +4,9 @@ import { DocsThemeConfig } from "nextra-theme-docs";
 const config: DocsThemeConfig = {
   logo: <span>*bitlab</span>,
   project: {
-    link: "https://github.com/yourusername/informatika-ege-oge",
+    link: "https://github.com/rainboowbee/nextra-app",
   },
-  chat: {
-    link: "https://t.me/rainboowbee",
-  },
-  docsRepositoryBase: "https://github.com/yourusername/informatika-ege-oge",
+  docsRepositoryBase: "https://github.com/rainboowbee/nextra-app",
   footer: {
     text: "bitlab © 2025",
   },

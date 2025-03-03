@@ -2,6 +2,7 @@
   "index": "Главная",
   "EGE": "ЕГЭ",
   "OGE": "ОГЭ",
+  "python": "Python",
   "about": {
     "title": "О проекте",
     "type": "page"

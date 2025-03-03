@@ -1,11 +1,14 @@
 {
   "index": "Введение в Python",
   "print": "Функция print",
+  "ifelifelse": "if elif else",
   "variables": "Переменные и типы данных",
   "operators": "Операторы",
-  "conditionals": "Условные конструкции",
   "loops": "Циклы",
-  "functions": "Функции",
+  "strings": "Строки",
   "lists": "Списки",
-  "dictionaries": "Словари"
+  "dictionaries": "Словари",
+  "functions": "Функции",
+  "files": "Работа с файлами",
+  "modules": "Модули"
 }
