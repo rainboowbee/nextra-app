@@ -1,13 +1,13 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "index": "Главная",
+  "EGE": "ЕГЭ",
+  "OGE": "ОГЭ",
   "about": {
-    "title": "About",
+    "title": "О проекте",
     "type": "page"
   },
   "contact": {
-    "title": "Contact ↗",
+    "title": "Контакты ↗",
     "type": "page",
     "href": "https://t.me/rainboowbee",
     "newWindow": true

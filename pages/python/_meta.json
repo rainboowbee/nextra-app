@@ -1,0 +1,11 @@
+{
+  "index": "Введение в Python",
+  "print": "Функция print",
+  "variables": "Переменные и типы данных",
+  "operators": "Операторы",
+  "conditionals": "Условные конструкции",
+  "loops": "Циклы",
+  "functions": "Функции",
+  "lists": "Списки",
+  "dictionaries": "Словари"
+}
