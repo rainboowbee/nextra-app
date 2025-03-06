@@ -7,6 +7,11 @@ const config: DocsThemeConfig = {
     link: "https://github.com/rainboowbee/nextra-app",
   },
   docsRepositoryBase: "https://github.com/rainboowbee/nextra-app",
+  banner: {
+    key: 'nextra-banner',
+    text: '🎉 Добавлен материал по 5 заданию',
+    dismissible: true,
+  },
   footer: {
     text: "bitlab © 2025",
   },
