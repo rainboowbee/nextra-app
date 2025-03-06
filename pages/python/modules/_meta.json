@@ -1,8 +1,7 @@
 {
   "index": "Обзор модулей",
-  "itertools": "Модуль itertools",
-  "functools": "Модуль functools",
-  "numbersystem": "Модуль numbersystem",
-  "turtle": "Модуль turtle",
-  "ipaddress": "Модуль ipaddress"
+  "itertools": "itertools",
+  "numbersystem": "перевод в разные СС",
+  "turtle": "turtle",
+  "ipaddress": "ipaddress"
 }
