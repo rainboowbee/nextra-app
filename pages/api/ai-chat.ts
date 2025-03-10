@@ -16,40 +16,43 @@ export default async function handler(req, res) {
          Пиши ответы на русском языке. Используй конкретные примеры, если это поможет пояснить материал.
          
          Важно: Всегда форматируй код в блоках кода, используя тройные обратные кавычки с указанием языка.
-         Например:
-         \`\`\`python
-         print("Hello World")
-         # Выведет Hello world
-         \`\`\`
-
-         Или
-
-         \`\`\`python
-         mystring = "   Hello World   "
-         print(mystring)
-         # вывод:   Hello World
-         \`\`\`
+         После блока кода ОБЯЗАТЕЛЬНО добавляй пустую строку перед продолжением текста.
          
-         Не забывай указывать язык программирования после открывающих обратных кавычек. Так же не ставь лишние пустые строки между кодом.`
+         Пример правильного форматирования:
+         \`\`\`python
+         def example():
+             return "Hello"
+         \`\`\`
+
+         Это пояснение к коду.
+         
+         \`\`\`python
+         def another():
+             return "World"
+         \`\`\`
+
+         И это следующее пояснение.`
       : `Ты эксперт по информатике, который помогает ученикам с подготовкой к ЕГЭ и ОГЭ.
-         Объясняй решения шаг за шагом
+         Объясняй решения шаг за шагом.
          Пиши ответы на русском языке. Используй конкретные примеры, если это поможет пояснить материал.
          
          Важно: Всегда форматируй код в блоках кода, используя тройные обратные кавычки с указанием языка.
-         Например:
-         \`\`\`python
-         print("Hello World")
-         \`\`\`
-
-         Или
-
-         \`\`\`python
-         mystring = "   Hello World   "
-         print(mystring)
-         # вывод:   Hello World
-         \`\`\`
+         После блока кода ОБЯЗАТЕЛЬНО добавляй пустую строку перед продолжением текста.
          
-         Не забывай указывать язык программирования после открывающих обратных кавычек. Так же не ставь лишние пустые строки между кодом.`;
+         Пример правильного форматирования:
+         \`\`\`python
+         def example():
+             return "Hello"
+         \`\`\`
+
+         Это пояснение к коду.
+         
+         \`\`\`python
+         def another():
+             return "World"
+         \`\`\`
+
+         И это следующее пояснение.`;
 
     // Подготовка сообщений для API
     const apiMessages = [
@@ -98,16 +101,80 @@ export default async function handler(req, res) {
     }
 
     // Извлекаем текст ответа
-    const content = result.choices[0].message?.content || '';
+    let content = result.choices[0].message?.content || '';
+    
+    // Форматируем текст в стиле MDX
+    content = content
+      // Убираем множественные пробелы между словами (только в обычном тексте)
+      .replace(/```[\s\S]*?```/g, match => {
+        // Сохраняем блоки кода без изменений
+        return `<<<CODE>>>${match}<<<CODE>>>`;
+      })
+      .replace(/[ \t]+/g, ' ')
+      // Возвращаем блоки кода
+      .replace(/<<<CODE>>>([\s\S]*?)<<<CODE>>>/g, '$1')
+      // Убираем множественные переносы строк (оставляем максимум два)
+      .replace(/\n{3,}/g, '\n\n')
+      // Убираем пустые строки перед блоками кода
+      .replace(/\n+```/g, '\n```')
+      // Убираем лишние пустые строки после блоков кода
+      .replace(/```\n+/g, '```\n')
+      // Исправляем случаи, когда нет закрывающих кавычек
+      .replace(/```(\w+)\n([^]*?)(?=```|$)/g, (match, lang, code) => {
+        if (!match.endsWith('```')) {
+          // Сохраняем оригинальные отступы в коде
+          return `\`\`\`${lang}\n${code}\`\`\`\n`;
+        }
+        return match;
+      })
+      // Убираем пробелы в конце строк (только в обычном тексте)
+      .replace(/```[\s\S]*?```/g, match => {
+        return `<<<CODE>>>${match}<<<CODE>>>`;
+      })
+      .replace(/[ \t]+$/gm, '')
+      .replace(/<<<CODE>>>([\s\S]*?)<<<CODE>>>/g, '$1')
+      // Убираем пустые строки в начале и конце текста
+      .trim();
 
-    // Разбиваем контент на части и отправляем по одной (имитация стриминга)
-    const chunkSize = 4; // Размер чанка
-    for (let i = 0; i < content.length; i += chunkSize) {
-      const chunk = content.slice(i, i + chunkSize);
-      res.write(`data: ${JSON.stringify({ content: chunk })}\n\n`);
+    // Разбиваем текст на сегменты, сохраняя форматирование MDX
+    const segments = [];
+    let currentPos = 0;
+    const codeBlockRegex = /```(\w+)\n([\s\S]*?)```\n/g;
+    let match;
+    
+    while ((match = codeBlockRegex.exec(content)) !== null) {
+      // Добавляем текст до блока кода
+      if (match.index > currentPos) {
+        const text = content.substring(currentPos, match.index).trim();
+        if (text) {
+          // Форматируем текстовый сегмент
+          const formattedText = text
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line)
+            .join('\n');
+          
+          segments.push({
+            type: 'text',
+            content: formattedText + '\n\n'
+          });
+        }
+      }
       
-      // Добавляем небольшую задержку для имитации потоковой передачи
-      await new Promise(resolve => setTimeout(resolve, 10));
+      // Добавляем блок кода, сохраняя оригинальное форматирование
+      const [fullMatch, lang, code] = match;
+      segments.push({
+        type: 'code',
+        content: `\`\`\`${lang}\n${code}\`\`\`\n`
+      });
+      
+      currentPos = match.index + match[0].length;
+    }
+    
+    // Отправляем сегменты
+    for (const segment of segments) {
+      res.write(`data: ${JSON.stringify({ content: segment.content })}\n\n`);
+      await new Promise(resolve => setTimeout(resolve, 30));
     }
 
     res.write('data: [DONE]\n\n');
