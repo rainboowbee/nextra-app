@@ -26,7 +26,11 @@
     "nextra-theme-docs": "^2.2.14",
     "openai": "^4.86.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-markdown": "^10.1.0",
+    "react-syntax-highlighter": "^15.6.1",
+    "remark-gfm": "^4.0.1",
+    "styled-jsx": "^5.1.6"
   },
   "devDependencies": {
     "@types/node": "18.11.10",

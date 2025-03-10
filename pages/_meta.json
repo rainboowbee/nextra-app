@@ -12,5 +12,9 @@
   "about": {
     "title": "О проекте",
     "type": "page"
+  },
+  "ai-helper": {
+    "title": "AI помощник",
+    "type": "page"
   }
 }
