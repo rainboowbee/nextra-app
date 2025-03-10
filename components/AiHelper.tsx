@@ -89,29 +89,19 @@ export default function AiHelper() {
           if (line.startsWith('data: ')) {
             const data = line.slice(6);
             if (data === '[DONE]') continue;
-            
+
             try {
-              // Пытаемся парсить как JSON
               const parsed = JSON.parse(data);
-              if (parsed.choices && parsed.choices[0]?.delta?.content) {
-                assistantResponse += parsed.choices[0].delta.content;
-                // Обновляем сообщение ассистента с накопленным текстом
+              if (parsed.content) {
+                assistantResponse += parsed.content;
                 setMessages(prev => prev.map(msg => 
                   msg.id === assistantMessageId 
                     ? { ...msg, content: assistantResponse } 
                     : msg
                 ));
               }
-            } catch (e) {
-              // Если не удалось распарсить как JSON, добавляем как простой текст
-              if (data !== '[DONE]') {
-                assistantResponse += data;
-                setMessages(prev => prev.map(msg => 
-                  msg.id === assistantMessageId 
-                    ? { ...msg, content: assistantResponse } 
-                    : msg
-                ));
-              }
+            } catch (err) {
+              console.error('Ошибка парсинга JSON:', err);
             }
           }
         }
