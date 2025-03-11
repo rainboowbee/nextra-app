@@ -1,20 +1,33 @@
 {
-  "index": "Главная",
-  "EGE": "ЕГЭ",
-  "OGE": "ОГЭ",
-  "python": "Python",
-  "contact": {
-    "title": "Контакты ↗",
+  "index": {
+    "title": "Главная",
+    "type": "page"
+  },
+  "ai-helper-dev": {
+    "title": "AI-помощник",
     "type": "page",
-    "href": "https://t.me/rainboowbee",
-    "newWindow": true
+    "href": "./ai-helper-dev"
   },
   "about": {
     "title": "О проекте",
     "type": "page"
   },
-  "ai-helper": {
-    "title": "AI помощник",
+  "python": {
+    "title": "Python",
     "type": "page"
+  },
+  "OGE": {
+    "title": "ОГЭ",
+    "type": "page"
+  },
+  "EGE": {
+    "title": "ЕГЭ",
+    "type": "page"
+  },
+  "contact": {
+    "title": "Контакты ↗",
+    "type": "page",
+    "href": "https://t.me/rainboowbee",
+    "newWindow": true
   }
 }

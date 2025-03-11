@@ -182,147 +182,149 @@ export default function AiHelper() {
   );
 
   return (
-    <>
-      <div className="flex flex-col flex-1 nextra-container main-container">
-        <div className="flex flex-wrap gap-2 p-4 bg-white dark:bg-gray-800 border-b dark:border-gray-700">
-          <div className="flex space-x-2 mx-auto max-w-3xl w-full">
-            <button 
-              onClick={() => setIsCodeAnalysis(false)}
-              className={`px-4 py-2 rounded transition-colors duration-200 ${!isCodeAnalysis ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'}`}
-            >
-              Помощь по заданиям
-            </button>
-            <button 
-              onClick={() => setIsCodeAnalysis(true)}
-              className={`px-4 py-2 rounded transition-colors duration-200 ${isCodeAnalysis ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'}`}
-            >
-              Анализ кода
-            </button>
-          </div>
+    <div className="flex flex-col h-[calc(100vh-250px)] max-h-[800px]">
+      <div className="flex flex-wrap gap-3 p-4 bg-white/50 dark:bg-gray-800/50 border-b border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm">
+        <div className="flex flex-col sm:flex-row gap-3 mx-auto max-w-3xl w-full">
+          <button 
+            onClick={() => setIsCodeAnalysis(false)}
+            className={`flex-1 px-6 py-3 rounded-xl transition-all duration-300 font-medium text-sm sm:text-base ${
+              !isCodeAnalysis 
+                ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 transform hover:scale-[1.02] hover:shadow-xl' 
+                : 'bg-gray-100 dark:bg-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-600/50 text-gray-700 dark:text-gray-200 backdrop-blur-sm'
+            }`}
+          >
+            Помощь по заданиям
+          </button>
+          <button 
+            onClick={() => setIsCodeAnalysis(true)}
+            className={`flex-1 px-6 py-3 rounded-xl transition-all duration-300 font-medium text-sm sm:text-base ${
+              isCodeAnalysis 
+                ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 transform hover:scale-[1.02] hover:shadow-xl' 
+                : 'bg-gray-100 dark:bg-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-600/50 text-gray-700 dark:text-gray-200 backdrop-blur-sm'
+            }`}
+          >
+            Анализ кода
+          </button>
         </div>
+      </div>
 
-        <div className="flex-1 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-900">
-          <div className="max-w-3xl mx-auto space-y-6">
-            {messages.map((message, index) => (
-              <div 
-                key={message.id}
-                className={`animate-fade-in ${message.role === 'user' ? 'flex justify-end' : 'flex justify-start'}`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className={`max-w-[80%] ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
-                  <div className="flex items-center mb-2">
-                    {message.role === 'user' ? (
-                      <>
-                        <span className="text-xs text-gray-500 mr-2">
-                          {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                        </span>
-                        <div className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">Вы</div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs px-3 py-1 rounded-full mr-2">AI</div>
-                        <span className="text-xs text-gray-500">
-                          {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                  
+      <div className="flex-1 overflow-y-auto p-4 bg-gradient-to-b from-gray-50/30 to-white/30 dark:from-gray-900/30 dark:to-gray-800/30 backdrop-blur-sm">
+        <div className="max-w-3xl mx-auto space-y-8">
+          {messages.map((message, index) => (
+            <div 
+              key={message.id}
+              className={`animate-fade-in relative ${message.role === 'user' ? 'flex justify-end' : 'flex justify-start'}`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              {/* Линия соединения */}
+              {index > 0 && (
+                <div 
+                  className={`absolute top-0 w-px h-8 bg-gradient-to-b from-transparent to-gray-200/50 dark:to-gray-700/50 ${
+                    message.role === 'user' ? 'right-[15%]' : 'left-[15%]'
+                  }`}
+                  style={{ transform: 'translateY(-32px)' }}
+                />
+              )}
+
+              <div className={`max-w-[85%] ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
+                <div className="flex items-center mb-2">
                   {message.role === 'user' ? (
-                    <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-4 rounded-2xl rounded-tr-none shadow-md">
+                    <>
+                      <span className="text-xs text-gray-500 mr-2 font-medium">
+                        {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs px-4 py-1.5 rounded-full shadow-sm font-medium">
+                        Вы
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs px-4 py-1.5 rounded-full shadow-sm font-medium mr-2">
+                        AI
+                      </div>
+                      <span className="text-xs text-gray-500 font-medium">
+                        {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                    </>
+                  )}
+                </div>
+                
+                {message.role === 'user' ? (
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-blue-600/20 rounded-2xl blur-lg transform scale-105"></div>
+                    <div className="relative bg-gradient-to-br from-blue-500 to-blue-600 text-white p-4 rounded-2xl rounded-tr-none shadow-lg transform transition-all duration-200 hover:scale-[1.01] hover:shadow-xl">
                       <pre className="whitespace-pre-wrap font-sans">
                         {message.content}
                       </pre>
                     </div>
-                  ) : (
-                    message.content ? (
-                      <div className="bg-white dark:bg-gray-800 p-4 rounded-2xl rounded-tl-none shadow-md border-2 border-emerald-100 dark:border-emerald-900">
+                  </div>
+                ) : (
+                  message.content ? (
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-2xl blur-lg transform scale-105"></div>
+                      <div className="relative bg-white/90 dark:bg-gray-800/90 p-4 rounded-2xl rounded-tl-none shadow-lg border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm transform transition-all duration-200 hover:scale-[1.01] hover:shadow-xl">
                         <div className="prose dark:prose-invert prose-sm max-w-none">
                           {renderMessageContent(message.content)}
                         </div>
                       </div>
-                    ) : (
-                      <div className="bg-white dark:bg-gray-800 p-3 rounded-2xl shadow-md border-2 border-emerald-100 dark:border-emerald-900">
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-2xl blur-lg transform scale-105"></div>
+                      <div className="relative bg-white/90 dark:bg-gray-800/90 p-4 rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm">
                         <LoadingAnimation />
                       </div>
-                    )
-                  )}
-                </div>
+                    </div>
+                  )
+                )}
               </div>
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
-        </div>
-
-        {error && (
-          <div className="fixed bottom-24 left-1/2 transform -translate-x-1/2 w-full max-w-2xl">
-            <div className="text-red-500 p-4 rounded bg-red-100 dark:bg-red-900/20 mx-4 border border-red-200 dark:border-red-800 shadow">
-              <div className="font-bold mb-1">Ошибка</div>
-              <div>{error.message}</div>
             </div>
-          </div>
-        )}
-
-        <div className="border-t dark:border-gray-700 bg-white dark:bg-gray-800 p-4">
-          <form onSubmit={handleSubmit} className="flex space-x-2 max-w-3xl mx-auto">
-            <textarea
-              className="flex-1 p-3 border rounded-md dark:border-gray-700 min-h-[80px] resize-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white dark:bg-gray-900"
-              value={input}
-              onChange={handleInputChange}
-              placeholder={isCodeAnalysis 
-                ? "Вставьте код для анализа..." 
-                : "Опишите задание или задайте вопрос..."}
-              disabled={isLoading}
-            />
-            <button 
-              type="submit" 
-              disabled={isLoading || !input.trim()}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50 hover:bg-blue-600 active:bg-blue-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-            >
-              {isLoading ? (
-                <span className="flex items-center">
-                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Отправка...
-                </span>
-              ) : (
-                "Отправить"
-              )}
-            </button>
-          </form>
+          ))}
+          <div ref={messagesEndRef} />
         </div>
       </div>
+
+      {error && (
+        <div className="fixed bottom-24 left-1/2 transform -translate-x-1/2 w-full max-w-2xl z-50">
+          <div className="mx-4 p-4 bg-red-50/90 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl shadow-lg backdrop-blur-sm">
+            <div className="font-medium text-red-800 dark:text-red-200">Ошибка</div>
+            <div className="mt-1 text-sm text-red-700 dark:text-red-300">{error.message}</div>
+          </div>
+        </div>
+      )}
+
+      <div className="border-t border-gray-200/50 dark:border-gray-700/50 bg-white/50 dark:bg-gray-800/50 p-4 backdrop-blur-sm">
+        <form onSubmit={handleSubmit} className="flex gap-3 max-w-3xl mx-auto">
+          <textarea
+            className="flex-1 p-4 border border-gray-200/50 dark:border-gray-700/50 rounded-xl min-h-[80px] resize-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm"
+            value={input}
+            onChange={handleInputChange}
+            placeholder={isCodeAnalysis 
+              ? "Вставьте код для анализа..." 
+              : "Опишите задание или задайте вопрос..."}
+            disabled={isLoading}
+          />
+          <button 
+            type="submit" 
+            disabled={isLoading || !input.trim()}
+            className="px-8 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl disabled:opacity-50 hover:shadow-lg hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 transition-all duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-opacity-50 disabled:hover:shadow-none transform hover:scale-[1.02] disabled:hover:scale-100 font-medium"
+          >
+            {isLoading ? (
+              <span className="flex items-center">
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Отправка...
+              </span>
+            ) : (
+              "Отправить"
+            )}
+          </button>
+        </form>
+      </div>
+
       <style jsx global>{`
-        .nextra-container {
-          max-width: none !important;
-          padding: 0 !important;
-          margin: 0 !important;
-          width: 100% !important;
-        }
-        
-        .main-container {
-          min-height: calc(100vh - 64px);
-          display: flex;
-          flex-direction: column;
-        }
-
-        article {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-          max-width: none !important;
-          padding: 0 !important;
-          margin: 0 !important;
-        }
-
-        main {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-        }
-
         @keyframes fade-in {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
@@ -385,6 +387,6 @@ export default function AiHelper() {
           margin-bottom: 0;
         }
       `}</style>
-    </>
+    </div>
   );
 }
