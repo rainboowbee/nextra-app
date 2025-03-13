@@ -9,7 +9,7 @@ const config: DocsThemeConfig = {
   docsRepositoryBase: "https://github.com/rainboowbee/nextra-app",
   banner: {
     key: 'nextra-banner',
-    text: '🎉 Добавлен материал по 5 заданию',
+    text: '🎉 Добавлен материал по 9 заданию',
     dismissible: true,
   },
   footer: {

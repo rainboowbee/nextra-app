@@ -228,4 +228,92 @@
     font-size: 1.35rem;
     max-width: 700px;
   }
+}
+
+/* Стили для кнопок */
+.ai-helper-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+}
+
+.ai-helper-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+}
+
+.dark .ai-helper-button {
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+}
+
+/* Стили для поля ввода */
+.ai-helper-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  font-size: 1rem;
+  color: #1f2937;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.ai-helper-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.dark .ai-helper-input {
+  color: #e5e7eb;
+  background: #1f2937;
+  border-color: #4b5563;
+}
+
+.dark .ai-helper-input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.1);
+}
+
+/* Стили для кнопки отправки */
+.ai-helper-submit {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.1);
+}
+
+.ai-helper-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+}
+
+.dark .ai-helper-submit {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+/* Контейнер для кнопок */
+.ai-helper-buttons-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
 } 

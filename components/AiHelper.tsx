@@ -187,7 +187,7 @@ export default function AiHelper() {
         <div className="flex flex-col sm:flex-row gap-3 mx-auto max-w-3xl w-full">
           <button 
             onClick={() => setIsCodeAnalysis(false)}
-            className={`flex-1 px-6 py-3 rounded-xl transition-all duration-300 font-medium text-sm sm:text-base ${
+            className={`ai-helper-button ${
               !isCodeAnalysis 
                 ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 transform hover:scale-[1.02] hover:shadow-xl' 
                 : 'bg-gray-100 dark:bg-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-600/50 text-gray-700 dark:text-gray-200 backdrop-blur-sm'
@@ -197,7 +197,7 @@ export default function AiHelper() {
           </button>
           <button 
             onClick={() => setIsCodeAnalysis(true)}
-            className={`flex-1 px-6 py-3 rounded-xl transition-all duration-300 font-medium text-sm sm:text-base ${
+            className={`ai-helper-button ${
               isCodeAnalysis 
                 ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 transform hover:scale-[1.02] hover:shadow-xl' 
                 : 'bg-gray-100 dark:bg-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-600/50 text-gray-700 dark:text-gray-200 backdrop-blur-sm'
@@ -293,33 +293,22 @@ export default function AiHelper() {
         </div>
       )}
 
-      <div className="border-t border-gray-200/50 dark:border-gray-700/50 bg-white/50 dark:bg-gray-800/50 p-4 backdrop-blur-sm">
-        <form onSubmit={handleSubmit} className="flex gap-3 max-w-3xl mx-auto">
-          <textarea
-            className="flex-1 p-4 border border-gray-200/50 dark:border-gray-700/50 rounded-xl min-h-[80px] resize-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm"
+      <div className="flex items-center p-4 bg-white/80 dark:bg-gray-800/80 border-t border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm">
+        <form onSubmit={handleSubmit} className="flex gap-2 w-full max-w-3xl mx-auto">
+          <input
+            type="text"
             value={input}
             onChange={handleInputChange}
-            placeholder={isCodeAnalysis 
-              ? "Вставьте код для анализа..." 
-              : "Опишите задание или задайте вопрос..."}
+            placeholder={isCodeAnalysis ? "Вставьте код для анализа..." : "Задайте вопрос по информатике..."}
+            className="ai-helper-input"
             disabled={isLoading}
           />
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={isLoading || !input.trim()}
-            className="px-8 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl disabled:opacity-50 hover:shadow-lg hover:from-blue-600 hover:to-blue-700 active:from-blue-700 active:to-blue-800 transition-all duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-opacity-50 disabled:hover:shadow-none transform hover:scale-[1.02] disabled:hover:scale-100 font-medium"
+            className="ai-helper-submit"
           >
-            {isLoading ? (
-              <span className="flex items-center">
-                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Отправка...
-              </span>
-            ) : (
-              "Отправить"
-            )}
+            Отправить
           </button>
         </form>
       </div>
