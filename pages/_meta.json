@@ -12,6 +12,10 @@
     "title": "О проекте",
     "type": "page"
   },
+  "schedule": {
+    "title": "Расписание",
+    "type": "page"
+  },
   "python": {
     "title": "Python",
     "type": "page"

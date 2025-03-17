@@ -1,0 +1,64 @@
+---
+title: Расписание занятий
+description: Расписание занятий и мероприятий
+---
+
+import { Table, TableHead, TableBody, TableRow, TableCell } from '../components/Table'
+
+# Расписание занятий
+
+<div className="max-w-5xl mx-auto">
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell isHeader className="w-32">Время</TableCell>
+        <TableCell isHeader>Понедельник</TableCell>
+        <TableCell isHeader>Вторник</TableCell>
+        <TableCell isHeader>Среда</TableCell>
+        <TableCell isHeader>Четверг</TableCell>
+        <TableCell isHeader>Пятница</TableCell>
+        <TableCell isHeader>Суббота</TableCell>
+        <TableCell isHeader>Воскресенье</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell className="font-medium">09:00 - 10:30</TableCell>
+        <TableCell>Занятие 1</TableCell>
+        <TableCell>Занятие 2</TableCell>
+        <TableCell>Занятие 3</TableCell>
+        <TableCell>Занятие 4</TableCell>
+        <TableCell>Занятие 5</TableCell>
+        <TableCell>Занятие 6</TableCell>
+        <TableCell>Выходной</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell className="font-medium">10:45 - 12:15</TableCell>
+        <TableCell>Занятие 7</TableCell>
+        <TableCell>Занятие 8</TableCell>
+        <TableCell>Занятие 9</TableCell>
+        <TableCell>Занятие 10</TableCell>
+        <TableCell>Занятие 11</TableCell>
+        <TableCell>Занятие 12</TableCell>
+        <TableCell>Выходной</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell className="font-medium">13:00 - 14:30</TableCell>
+        <TableCell>Занятие 13</TableCell>
+        <TableCell>Занятие 14</TableCell>
+        <TableCell>Занятие 15</TableCell>
+        <TableCell>Занятие 16</TableCell>
+        <TableCell>Занятие 17</TableCell>
+        <TableCell>Занятие 18</TableCell>
+        <TableCell>Выходной</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</div>
+
+## Примечания
+
+- Время указано в формате 24 часа
+- Перерыв между занятиями: 15 минут
+- В воскресенье занятия не проводятся
+- При необходимости расписание может быть изменено 
